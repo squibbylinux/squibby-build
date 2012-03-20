@@ -1,0 +1,5 @@
+squibby-build-deps (1.0) precise; urgency=low
+
+  * Initial release.
+
+ -- Pantelis Koukousoulas <pktoss@gmail.com>  Tue, 20 Mar 2012 16:58:04 +0200
