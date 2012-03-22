@@ -6,7 +6,7 @@ cp -a config.in config
 
 MIRROR=http://archive.ubuntu.com/ubuntu
 COMPONENTS='main restricted universe multiverse'
-SUITE=`lsb-release -cs`
+SUITE=`lsb_release -cs`
 
 lb config noauto \
         --mode ubuntu \
