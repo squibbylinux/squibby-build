@@ -21,4 +21,7 @@ lb config
 
 sed -i "s/^\\(LB_SYSLINUX_THEME=\\).*/\\1\"kubuntu-$SUITE\"/" config/binary
 
+# work around live-build failure with lzma initramfs (Debian #637979)
+sed -i 's/^LB_INITRAMFS_COMPRESSION="lzma"/LB_INITRAMFS_COMPRESSION="gzip"/' config/common
+
 $SUDO lb build
