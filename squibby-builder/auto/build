@@ -58,7 +58,7 @@ EOF
 ) 2>&1 | tee binary.log
 
 # Link output files somewhere BuildLiveCD will be able to find them.
-PREFIX="livecd.$PROJECT${SUBARCH:+-$SUBARCH}"
+PREFIX="livecd.squibby"
 
 case $LB_INITRAMFS in
 	casper)

@@ -1,5 +1,6 @@
 #!/bin/sh
 export LANG=C
+export SUITE=$(lsb_release -cs)
 
 if [ "$(id -u)" = 0 ]; then
 	SUDO=env
@@ -18,6 +19,6 @@ rm -f .stage/config
 
 lb config
 
-sed -i "s/^\\(LB_SYSLINUX_THEME=\\).*/\\1\"ubuntu-$SUITE\"/" config/binary
+sed -i "s/^\\(LB_SYSLINUX_THEME=\\).*/\\1\"kubuntu-$SUITE\"/" config/binary
 
 $SUDO lb build
