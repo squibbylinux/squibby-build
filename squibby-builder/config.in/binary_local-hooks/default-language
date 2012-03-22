@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "el" > binary/isolinux/lang
+echo >> binary/isolinux/lang

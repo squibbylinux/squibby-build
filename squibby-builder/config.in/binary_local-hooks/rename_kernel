@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [ ! -e binary/casper/initrd.lz ]; then
+	zcat binary/casper/initrd.img-* | lzma -c > binary/casper/initrd.lz
+	rm binary/casper/initrd.img-*
+fi
+if [ ! -e binary/casper/vmlinuz ]; then
+	mv binary/casper/vmlinuz-* binary/casper/vmlinuz
+fi

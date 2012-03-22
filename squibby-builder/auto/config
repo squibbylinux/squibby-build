@@ -1,0 +1,39 @@
+#!/bin/bash
+set -eu
+
+rm -rf config
+cp -a config.in config
+
+MIRROR=http://archive.ubuntu.com/ubuntu
+COMPONENTS='main restricted universe multiverse'
+SUITE=`lsb-release -cs`
+
+lb config noauto \
+        --mode ubuntu \
+        --distribution $SUITE \
+        --bootstrap-keyring ubuntu-keyring \
+        --binary-images iso-hybrid \
+        --memtest memtest86+ \
+        --source false \
+        --build-with-chroot false \
+        --parent-mirror-bootstrap $MIRROR \
+        --parent-archive-areas $COMPONENTS \
+        --package-lists none \
+        --initsystem none \
+        --bootloader syslinux \
+        --initramfs-compression lzma
+
+cat > config/binary_rootfs/excludes << EOF
+boot/vmlinu?-*
+boot/initrd.img-*
+EOF
+
+ln -s /usr/share/live/build/examples/hooks/all_chroot_pyc-purge.sh config/chroot_local-hooks/
+ln -s /usr/share/live/build/examples/hooks/kubuntu_chroot_icon-theme.sh config/chroot_local-hooks/
+
+. config/bootstrap
+cat > config/archives/dvd.binary.list << EOF
+deb $LB_PARENT_MIRROR_BINARY $SUITE universe multiverse
+deb $LB_PARENT_MIRROR_BINARY_SECURITY $SUITE-security universe multiverse
+deb $LB_PARENT_MIRROR_BINARY_VOLATILE $SUITE-updates universe multiverse
+EOF

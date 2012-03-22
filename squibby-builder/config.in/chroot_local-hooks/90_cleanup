@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+echo "$0: Removing unnecessary files..."
+rm -vf /var/cache/apt/*cache.bin
+rm -vf /var/lib/apt/lists/*_*
+rm -vrf /tmp/*

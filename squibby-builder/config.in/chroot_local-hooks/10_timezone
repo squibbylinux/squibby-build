@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+
+# This seems to be the "proper" way to pre-configure the timezone
+echo "Europe/Athens" > /etc/timezone
+dpkg-reconfigure -f noninteractive tzdata

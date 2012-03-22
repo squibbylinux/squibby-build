@@ -1,0 +1,23 @@
+#!/bin/sh
+export LANG=C
+
+if [ "$(id -u)" = 0 ]; then
+	SUDO=env
+else
+	SUDO=sudo
+fi
+
+# Make sure all our dependencies (which are Recommends of our package) are
+# installed.  This is a bit dubious long-term, but seems to be needed to
+# make autobuilds reliable.
+$SUDO apt-get -y install syslinux-themes-ubuntu gfxboot-theme-ubuntu memtest86+ syslinux
+$SUDO apt-get -y install genisoimage
+
+$SUDO lb clean
+rm -f .stage/config
+
+lb config
+
+sed -i "s/^\\(LB_SYSLINUX_THEME=\\).*/\\1\"ubuntu-$SUITE\"/" config/binary
+
+$SUDO lb build

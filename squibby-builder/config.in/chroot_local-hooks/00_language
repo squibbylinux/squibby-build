@@ -1,0 +1,54 @@
+#!/bin/sh
+set -e
+
+#uncomment this to just do a test run without actually installing/removing packages
+#TEST='echo WOULD RUN:'
+
+REQUESTED_LANGUAGES=/root/langpacks.txt
+INSTALLED_LANGUAGES=/root/installed_languages
+
+echo 'P: Configuring language support...'
+
+if [ ! -e "$REQUESTED_LANGUAGES" ]; then
+    echo "P: No $REQUESTED_LANGUAGES file, skipping"
+    exit 0
+fi
+
+
+# determine installed languages
+trap "rm -f $INSTALLED_LANGUAGES" 0 HUP INT ABRT FPE PIPE TERM
+dpkg -l 'language-pack-*'|perl -ne 'if (/^ii\s+.*language-pack-((?:zh-)?[a-z]+)\s/) { print "$1\n" }' | sort -u > $INSTALLED_LANGUAGES
+
+REMOVE_LANGUAGES=`join -j 1 -v 1 $INSTALLED_LANGUAGES $REQUESTED_LANGUAGES`
+
+echo -n 'requested: '
+sed "s/ complete/(complete)/" < "$REQUESTED_LANGUAGES" | xargs
+echo -n 'installed: '
+xargs < $INSTALLED_LANGUAGES
+echo -n 'to remove: '
+echo "$REMOVE_LANGUAGES" | xargs
+
+# removal
+for lang in $REMOVE_LANGUAGES; do
+    pkgs=`check-language-support --show-installed -l $lang`
+    echo "P: Removing packages for language $lang: $pkgs"
+    $TEST apt-get -y -q purge $pkgs
+done
+
+# install
+# note that we iterate through all requested languages, instead of just
+# computing the delta between requested and installed; this will catch
+# languages which are already installed, but without complete support
+(cat "$REQUESTED_LANGUAGES"; echo) | while read lang complete; do
+    [ -n "$lang" ] || continue
+    pkgs=`check-language-support -l $lang`
+    if [ "$complete" != "complete" ]; then
+	pkgs=`echo "$pkgs" | xargs -n1 | grep ^language-pack-` || true
+    fi
+    if [ -n "$pkgs" ]; then
+	echo "P: Installing packages for language $lang: $pkgs"
+	$TEST apt-get -y -q install $pkgs
+    fi
+done
+
+echo 'P: Language support configuration done.'
