@@ -27,7 +27,8 @@ Depends: ${misc:Depends},
  germinate ( >= 1.25.1),
  apt-utils,
  gnupg,
- live-build (>= 3.0~a22-1ubuntu1)
+ live-build (>= 3.0~a24-1ubuntu33~squibby0.1),
+ apt-cacher-ng
 Recommends: syslinux-themes-ubuntu, gfxboot-theme-ubuntu, memtest86+, genisoimage, syslinux
 Suggests: partimage
 Description: Dependencies for building LiveCDs
