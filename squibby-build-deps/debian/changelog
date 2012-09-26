@@ -1,3 +1,9 @@
+squibby-build-deps (1.2) precise; urgency=low
+
+  * Add git and devscripts as recommendations
+
+ -- Pantelis Koukousoulas <pktoss@gmail.com>  Wed, 26 Sep 2012 18:54:29 +0300
+
 squibby-build-deps (1.1) precise; urgency=low
 
   * switch to recommending syslinux-themes-squibby instead of -ubuntu

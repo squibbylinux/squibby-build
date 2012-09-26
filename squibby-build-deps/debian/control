@@ -29,7 +29,13 @@ Depends: ${misc:Depends},
  gnupg,
  live-build (>= 3.0~a24-1ubuntu33~squibby0.1),
  apt-cacher-ng
-Recommends: syslinux-themes-squibby, gfxboot-theme-ubuntu, memtest86+, genisoimage, syslinux
+Recommends: syslinux-themes-squibby,
+ gfxboot-theme-ubuntu,
+ memtest86+,
+ genisoimage,
+ syslinux,
+ git,
+ devscripts
 Suggests: partimage
 Description: Dependencies for building LiveCDs
  This metapackage collects the dependencies required for
