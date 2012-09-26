@@ -1,0 +1,16 @@
+#!/bin/sh
+mkdir -p binary/boot/grub
+
+cat > binary/boot/grub/loopback.cfg << EOF
+menuentry "Start Kubuntu" {
+	linux	/casper/vmlinuz  file=/cdrom/preseed/squibby.seed boot=casper maybe-ubiquity iso-scan/filename=${iso_path} quiet splash --
+	initrd	/casper/initrd.lz
+}
+menuentry "Check disc for defects" {
+	linux	/casper/vmlinuz  boot=casper integrity-check iso-scan/filename=${iso_path} quiet splash --
+	initrd	/casper/initrd.lz
+}
+menuentry "Test memory" {
+	linux16	/install/mt86plus
+}
+EOF

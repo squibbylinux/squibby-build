@@ -1,0 +1,13 @@
+# Enable extras.ubuntu.com.
+d-i	apt-setup/extras	boolean true
+# Install the Kubuntu desktop.
+tasksel	tasksel/first	multiselect squibby-desktop
+# Install KDE translation packages.
+d-i	pkgsel/language-pack-patterns	string language-pack-kde-$LL kde-i18n-$LL
+# Install the KDE oem-config frontend (if in OEM mode).
+d-i	oem-config-udeb/frontend	string kde
+# On live DVDs, don't spend huge amounts of time removing substantial
+# application packages pulled in by language packs. Given that we clearly
+# have the space to include them on the DVD, they're useful and we might as
+# well keep them installed.
+ubiquity	ubiquity/keep-installed	string icedtea6-plugin openoffice.org

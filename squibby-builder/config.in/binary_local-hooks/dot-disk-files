@@ -1,0 +1,20 @@
+#!/bin/sh
+
+now=$(date +"%Y%m%d")
+
+mkdir -p binary/.disk
+cd binary/.disk
+
+touch base_installable
+
+cat > cd_type << EOF
+full_cd/single
+EOF
+
+cat > info << EOF
+Kubuntu 12.04 LTS "Precise Pangolin" - Release ${ARCH} (${now})
+EOF
+
+cat > release_notes_url << EOF
+http://www.ubuntu.com/getubuntu/releasenotes?os=kubuntu&ver=12.04&lang=${LANG}
+EOF

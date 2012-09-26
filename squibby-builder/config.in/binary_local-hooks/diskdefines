@@ -1,0 +1,12 @@
+#!/bin/sh
+cat > binary/README.diskdefines << EOF
+#define DISKNAME  Kubuntu 12.04 LTS "Precise Pangolin" - Release ${ARCH}
+#define TYPE  binary
+#define TYPEbinary  1
+#define ARCH  ${ARCH}
+#define ARCH${ARCH}  1
+#define DISKNUM  1
+#define DISKNUM1  1
+#define TOTALNUM  0
+#define TOTALNUM0  1
+EOF
