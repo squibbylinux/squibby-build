@@ -11,6 +11,7 @@ SUITE=`lsb_release -cs`
 lb config noauto \
         --mode ubuntu \
         --distribution $SUITE \
+	--architectures $ARCH \
         --bootstrap-keyring ubuntu-keyring \
         --binary-images iso-hybrid \
         --memtest memtest86+ \

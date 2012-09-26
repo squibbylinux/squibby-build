@@ -1,6 +1,7 @@
 #!/bin/sh
 export LANG=C
 export SUITE=$(lsb_release -cs)
+export ARCH=$(dpkg --print-architecture)
 
 if [ "$(id -u)" = 0 ]; then
 	SUDO=env
