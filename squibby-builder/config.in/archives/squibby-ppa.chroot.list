@@ -1,2 +1,2 @@
-#deb http://ppa.launchpad.net/squibbylinux/archive/ubuntu precise main
-deb http://ppa.launchpad.net/pktoss/squibbytest/ubuntu precise main
+deb http://ppa.launchpad.net/squibbylinux/stable/ubuntu precise main
+#deb http://ppa.launchpad.net/pktoss/squibbytest/ubuntu precise main
