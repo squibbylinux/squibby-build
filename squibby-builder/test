@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+rm -f test.img
+qemu-img create test.img 10G
+kvm -m 1024 -net nic,model=virtio -net user -hda test.img -cdrom binary-hybrid.iso $@
