@@ -28,6 +28,7 @@ lb config noauto \
         --parent-mirror-binary $MIRROR \
         --parent-mirror-binary-security $MIRROR \
         --parent-mirror-binary-backports $MIRROR \
+        --archive-areas "main restricted universe" \
         --tasksel tasksel \
         --package-lists none \
         --initsystem none \
